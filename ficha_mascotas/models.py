@@ -19,8 +19,8 @@ class Usuarios(models.Model):
 
 class Mascotas(models.Model):
 
-  id_mascota = models.AutoField(primary_key=True)   
-  usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
+    id_mascota = models.AutoField(primary_key=True)   
+    usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=100)
     edad = models.IntegerField()
     tipo = models.CharField(max_length=100)
@@ -29,7 +29,7 @@ class Mascotas(models.Model):
     descripcion_fisica = models.TextField()
     peso = models.DecimalField(max_digits=5, decimal_places=2)
     descripcion_personalidad = models.TextField()
-    foto = models.ImageField(upload_to='mascotas', null=True, blank=True)
+    foto = models.ImageField(upload_to='mascotas', null=True, blank=True, multiple=True)
     alimento = models.CharField(max_length=100)
 
 @receiver(post_save, sender=Mascotas)
@@ -50,6 +50,38 @@ class Agenda(models.Model):
 
     def __str__(self):
         return f"{self.tipo} - {self.fecha} - {self.hora}"
+    
+class Veterinarias(models.Model):
+    id_veterinaria = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=100)
+    direccion = models.CharField(max_length=255)
+    telefono = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.nombre
+
+class Especialidades(models.Model):
+    id_especialidad = models.AutoField(primary_key=True)
+    nombre_especialidad = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nombre_especialidad
+
+class Vacunas(models.Model):
+    id_vacuna = models.AutoField(primary_key=True)
+    nombre_vacuna = models.CharField(max_length=100)
+    via_aplicacion = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nombre_vacuna
+
+class Staff(models.Model):
+    id_staff = models.AutoField(primary_key=True)
+    tipo = models.CharField(max_length=100)
+    disponibilidad = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.tipo
 
     
  
