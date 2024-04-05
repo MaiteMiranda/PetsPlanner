@@ -18,8 +18,9 @@ class Usuarios(models.Model):
         return f"{self.nombre} {self.apellido}"
 
 class Mascotas(models.Model):
-    id_mascota = models.AutoField(primary_key=True)
-    usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
+
+  id_mascota = models.AutoField(primary_key=True)   
+  usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=100)
     edad = models.IntegerField()
     tipo = models.CharField(max_length=100)
@@ -37,5 +38,18 @@ def actualizar_cantidad_mascotas(sender, instance, created, **kwargs):
         usuario = instance.usuario
         usuario.cantidad_mascotas += 1
         usuario.save()
+
+
+class Agenda(models.Model):
+    id_agenda = models.AutoField(primary_key=True)
+    tipo = models.CharField(max_length=100)
+    fecha = models.DateField()
+    hora = models.TimeField()
+    duracion = models.IntegerField()
+    horas_reservadas = models.IntegerField(default=0)  
+
+    def __str__(self):
+        return f"{self.tipo} - {self.fecha} - {self.hora}"
+
     
  
