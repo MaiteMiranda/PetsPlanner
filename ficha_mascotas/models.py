@@ -18,8 +18,9 @@ class Usuarios(models.Model):
         return f"{self.nombre} {self.apellido}"
 
 class Mascotas(models.Model):
-    id_mascota = models.AutoField(primary_key=True)  
-    usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
+
+  id_mascota = models.AutoField(primary_key=True)   
+  usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=100)
     edad = models.IntegerField()
     tipo = models.CharField(max_length=100)
